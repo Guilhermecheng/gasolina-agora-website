@@ -12,9 +12,13 @@ module.exports = {
       },
       colors: {
         'orange-400': '#F68B0C',
+        'textmaincolor': '#3D3070',
       },
       spacing: {
         'container': '940px',
+      },
+      fontSize: {
+        'title': '4rem',
       }
     },
   },

@@ -1,7 +1,17 @@
 import './styles/main.css';
 import whiteLogo from './assets/logo-white.svg'
+import { useEffect, useState } from 'react';
+
+import { CaretDown } from 'phosphor-react';
+import { PriceBlock } from './components/PriceBlock';
+import { ConfigMenu } from './components/ConfigMenu';
 
 function App() {
+  
+  const [isconfigPageOpen, setisConfigPageOpen] = useState(false);
+
+  const [confugFuelType, setConfugFuelType] = useState('Gasolina Comum');
+  const [configLocation, setconfigLocation] = useState('Brasil');
 
   return (
     <div className="w-full text-white justify-center">
@@ -19,32 +29,37 @@ function App() {
       </section>
 
       <section id='section2' className='h-[500px] flex flex-col items-center relative'>
-        <div id='price-block' className='z-10 absolute top-[-196px] max-w-[940px] w-[90%] mx-20 h-[450px] text-red-700 rounded-xl border border-[#B1B1B1] shadow-2xl bg-zinc-100'> {/* verify if w-container or w-full is better*/}
+        <div id='price-block' className='z-10 absolute top-[-196px] max-w-[940px] w-[90%] mx-20 h-[450px] text-textmaincolor rounded-xl border border-[#B1B1B1] shadow-2xl bg-zinc-100'> {/* verify if w-container or w-full is better*/}
           
-          <div className='w-full h-[4rem] flex items-center bg-zinc-300 rounded-t-xl '>
-            <div id="config-block" className=" w-[90%] grid  grid-cols-2">
-              <span>Combustível</span>
-              <span>Localidade</span>
+          <div className='w-full h-[5.5rem] flex items-center bg-zinc-300 rounded-t-xl md:h-[4rem] '>
+            <div id="config-block" className=" w-[90%] flex flex-col items-center px-8 space-x-2 space-y-2 md:flex-row">
+              <div className='w-full flex items-center justify-center text-2xl font-semibold md:text-2.5xl'>
+                Combustível: <span className='text-orange-400 text-2.5xl ml-2 '>{ confugFuelType }</span>
+              </div>
+
+              <div className='w-[50%] flex items-center justify-center text-2xl font-semibold md:text-2.5xl'>
+                Localidade: <span className='text-orange-400 text-2.5xl ml-2 '>{ configLocation }</span>
+              </div>
             </div>
 
-            <div className='w-[10%]'>seta</div>
-          </div>
-
-          <div id='price-block-main' className='flex flex-col items-center text-textmaincolor mt-6'>
-            <span id='title' className='text-4xl font-semibold'>
-              Preço da Gasolina no Brasil
-            </span>
-
-            <div className='text-5xl font-semibold mt-12'>
-              R$ <span className='text-8xl text-orange-400'>7,10</span> /litro 
+            <div id='config-menu-crevron' className='w-[10%] flex justify-center cursor-pointer'>
+              <CaretDown size={36} weight="bold" onClick={() => setisConfigPageOpen(!isconfigPageOpen)} />
             </div>
           </div>
+
+          { isconfigPageOpen ? (
+            <ConfigMenu />
+          ) : (
+            <PriceBlock />
+          ) }
 
         </div>
       </section>
 
-      <section id='section3' className='w-full h-[420px] flex flex-col items-center justify-center bg-orange-background'>
-        hey
+      <section id='section3' className='w-full h-[420px] flex flex-col items-center bg-orange-background'>
+        <span id='price-block-title' className='text-4xl font-semibold mt-12'>
+          O Gasolina Agora
+        </span>
       </section>
     </div>
   )

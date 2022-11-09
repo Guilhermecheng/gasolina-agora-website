@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { CaretDown } from 'phosphor-react';
 import { PriceBlock } from './components/PriceBlock';
 import { ConfigMenu } from './components/ConfigMenu';
+import { AboutUsBlock } from './components/AboutUsBlock';
 
 function App() {
   
@@ -29,7 +30,7 @@ function App() {
       </section>
 
       <section id='section2' className='h-[500px] flex flex-col items-center relative'>
-        <div id='price-block' className='z-10 absolute top-[-196px] max-w-[940px] w-[90%] mx-20 h-[450px] text-textmaincolor rounded-xl border border-[#B1B1B1] shadow-2xl bg-zinc-100'> {/* verify if w-container or w-full is better*/}
+        <div id='price-and-config-block' className='z-10 absolute top-[-196px] max-w-[940px] w-[90%] mx-20 h-[450px] text-textmaincolor rounded-xl border border-[#B1B1B1] shadow-2xl bg-zinc-100'> {/* verify if w-container or w-full is better*/}
           
           <div className='w-full h-[5.5rem] flex items-center bg-zinc-300 rounded-t-xl md:h-[4rem] '>
             <div id="config-block" className=" w-[90%] flex flex-col items-center px-8 space-x-2 space-y-2 md:flex-row">
@@ -43,12 +44,17 @@ function App() {
             </div>
 
             <div id='config-menu-crevron' className='w-[10%] flex justify-center cursor-pointer'>
-              <CaretDown size={36} weight="bold" onClick={() => setisConfigPageOpen(!isconfigPageOpen)} />
+              <CaretDown
+                size={36}
+                weight="bold"
+                className={`transition duration-500 ease-in-out transform ${isconfigPageOpen && 'rotate-180'}`}
+                onClick={() => setisConfigPageOpen(!isconfigPageOpen)} 
+              />
             </div>
           </div>
 
           { isconfigPageOpen ? (
-            <ConfigMenu />
+            <ConfigMenu isconfigPageOpen={isconfigPageOpen} />
           ) : (
             <PriceBlock />
           ) }
@@ -57,10 +63,10 @@ function App() {
       </section>
 
       <section id='section3' className='w-full h-[420px] flex flex-col items-center bg-orange-background'>
-        <span id='price-block-title' className='text-4xl font-semibold mt-12'>
-          O Gasolina Agora
-        </span>
+        <AboutUsBlock />
       </section>
+
+      <section></section>
     </div>
   )
 }

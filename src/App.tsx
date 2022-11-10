@@ -29,8 +29,8 @@ function App() {
         </div>
       </section>
 
-      <section id='section2' className='h-[500px] flex flex-col items-center relative'>
-        <div id='price-and-config-block' className='z-10 absolute top-[-196px] max-w-[940px] w-[90%] mx-20 h-[450px] text-textmaincolor rounded-xl border border-[#B1B1B1] shadow-2xl bg-zinc-100'> {/* verify if w-container or w-full is better*/}
+      <section id='section2' className='min-h-[500px] flex flex-col items-center relative'>
+        <div id='price-and-config-block' className='z-10 absolute top-[-196px] max-w-[940px] w-[90%] mx-20 min-h-[450px] text-textmaincolor rounded-xl border border-[#B1B1B1] shadow-2xl bg-zinc-100'> {/* verify if w-container or w-full is better*/}
           
           <div className='w-full h-[5.5rem] flex items-center bg-zinc-300 rounded-t-xl md:h-[4rem] '>
             <div id="config-block" className=" w-[90%] flex flex-col items-center px-8 space-x-2 space-y-2 md:flex-row">

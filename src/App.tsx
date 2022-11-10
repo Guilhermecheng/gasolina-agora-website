@@ -6,6 +6,7 @@ import { CaretDown } from 'phosphor-react';
 import { PriceBlock } from './components/PriceBlock';
 import { ConfigMenu } from './components/ConfigMenu';
 import { AboutUsBlock } from './components/AboutUsBlock';
+import { MiniBanner } from './components/MiniBanner';
 
 function App() {
   
@@ -16,6 +17,8 @@ function App() {
 
   return (
     <div className="w-full text-white justify-center">
+
+      <MiniBanner />
       <section className='w-full h-[500px]  flex flex-col items-center bg-purple-background z-0'>
         <div className='flex items-center justify-center  max-w-[940px] space-x-12 px-6 h-3/5'> {/* verify if w-container or w-full is better*/}
 

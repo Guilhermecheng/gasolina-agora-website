@@ -22,6 +22,31 @@ module.exports = {
         '3.5xl': '2rem',
 
         'title': '4rem',
+      },
+      transitionProperty: {
+        height: 'height',
+      },
+      keyframes: {
+        'open-accordion': {
+          '0%': {
+            height: 0,
+          },
+          '100%': {
+            height: 'var(--radix-accordion-content-height)',
+          }
+        },
+        'close-accordion': {
+          '0%': {
+            height: 'var(--radix-accordion-content-height)',
+          },
+          '100%': {
+            height: 0,
+          }
+        }
+      },
+      animation: {
+        'open-accordion': 'open-accordion .3s cubic-bezier(0.87, 0, 0.13, 1) forwards',
+        'close-accordion': 'close-accordion .3s cubic-bezier(0.87, 0, 0.13, 1) forwards',
       }
     },
   },

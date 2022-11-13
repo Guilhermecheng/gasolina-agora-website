@@ -1,5 +1,4 @@
 
-
 export function AboutUsBlock() {
 
     return (
@@ -8,7 +7,6 @@ export function AboutUsBlock() {
                 O Gasolina Agora
             </span>
 
-            
         </>
     )
 }

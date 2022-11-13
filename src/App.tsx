@@ -7,6 +7,7 @@ import { PriceBlock } from './components/PriceBlock';
 import { ConfigMenu } from './components/ConfigMenu';
 import { AboutUsBlock } from './components/AboutUsBlock';
 import { MiniBanner } from './components/MiniBanner';
+import { FaqBlock } from './components/FaqBlock';
 
 function App() {
   
@@ -76,7 +77,9 @@ function App() {
         <AboutUsBlock />
       </section>
 
-      <section></section>
+      <section className='w-full h-[420px] flex flex-col items-center'>
+        <FaqBlock />
+      </section>
     </div>
   )
 }

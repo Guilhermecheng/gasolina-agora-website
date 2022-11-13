@@ -8,6 +8,7 @@ import { ConfigMenu } from './components/ConfigMenu';
 import { AboutUsBlock } from './components/AboutUsBlock';
 import { MiniBanner } from './components/MiniBanner';
 import { FaqBlock } from './components/FaqBlock';
+import { Footer } from './components/Footer';
 
 function App() {
   
@@ -77,8 +78,12 @@ function App() {
         <AboutUsBlock />
       </section>
 
-      <section className='w-full h-[420px] flex flex-col items-center'>
+      <section className='w-full  flex flex-col items-center mb-8'>
         <FaqBlock />
+      </section>
+
+      <section className='w-full h-[420px] flex flex-col items-center  bg-violet-700'>
+        <Footer />
       </section>
     </div>
   )

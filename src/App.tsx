@@ -1,5 +1,5 @@
 import './styles/main.css';
-import whiteLogo from './assets/logo-white.svg'
+import { ReactComponent as WhiteLogo} from './assets/logo-white.svg'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -49,7 +49,7 @@ function App() {
       <section className='w-full h-[500px]  flex flex-col items-center bg-purple-background z-0'>
         <div className='flex items-center justify-center  max-w-[940px] space-x-12 px-6 h-3/5'> {/* verify if w-container or w-full is better*/}
 
-          <img src={ whiteLogo } />
+          <WhiteLogo />
           
           <div className='flex flex-col items-center max-w-[40rem] space-y-4 text-center'>
             <h1 className='text-orange-400 text-5xl md:text-title font-semibold'>Gasolina Agora</h1>

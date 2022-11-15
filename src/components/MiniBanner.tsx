@@ -15,7 +15,7 @@ export function MiniBanner() {
 
     // height effect and if mobile no-show
     return (
-        <div className={`fixed h-8 w-full bg-orange-400 text-sm text-zinc-100 font-semibold flex justify-center items-center transition duration-300 ease-in-out ${scrollYMoreThanZero && 'md:opacity-0'}`}>
+        <div className={`fixed h-8 w-full bg-orange-400 text-sm text-zinc-100 font-semibold flex justify-center items-center transition duration-300 ease-in-out ${scrollYMoreThanZero && 'opacity-0'}`}>
             Conheça também nossa extensão para o Google Chrome!<span className={`${scrollYMoreThanZero ? 'cursor-default' : 'md:cursor-pointer'}`}>&nbsp;Clique aqui</span>&nbsp;para baixar!
         </div>
     )

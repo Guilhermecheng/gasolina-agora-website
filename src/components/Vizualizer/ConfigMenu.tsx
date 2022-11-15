@@ -1,12 +1,10 @@
 import * as Accordion from '@radix-ui/react-accordion';
 
-import { capitalsDatabase, fuelDatabase, regionalDatabase, statesDatabase } from '../utils/FuelLocHandlerDatabase';
+import { capitalsDatabase, fuelDatabase, regionalDatabase, statesDatabase } from '../../utils/FuelLocHandlerDatabase';
 
-interface ConfigMenuProps {
-    isconfigPageOpen?: boolean;
-}
 
-export function ConfigMenu({ isconfigPageOpen= false }: ConfigMenuProps) {
+
+export function ConfigMenu() {
 
     return (
         <div id='config-menu' className={`flex flex-col items-center text-textmaincolor mt-6 `}>
@@ -36,7 +34,7 @@ export function ConfigMenu({ isconfigPageOpen= false }: ConfigMenuProps) {
                             <Accordion.AccordionContent className='max-h-32 overflow-y-auto  bg-zinc-200 px-4 rounded-md data-[state="open"]:animate-open-accordion data-[state="closed"]:animate-close-accordion'>
                                 { statesDatabase.map((state) => {
                                     return (
-                                        <p className='font-semibold cursor-pointer hover:text-orange-400 mt-1'>{ state.name }</p>
+                                        <p  key={state.id} className='font-semibold cursor-pointer hover:text-orange-400 mt-1'>{ state.name }</p>
                                     )
                                 }) }
                             </Accordion.AccordionContent>
@@ -50,7 +48,7 @@ export function ConfigMenu({ isconfigPageOpen= false }: ConfigMenuProps) {
                             <Accordion.AccordionContent className='max-h-32 overflow-y-auto  bg-zinc-200 px-4 rounded-md data-[state="open"]:animate-open-accordion data-[state="closed"]:animate-close-accordion'>
                                 { regionalDatabase.map((region) => {
                                         return (
-                                            <p className='font-semibold cursor-pointer hover:text-orange-400 mt-1'>{ region.name }</p>
+                                            <p  key={region.id} className='font-semibold cursor-pointer hover:text-orange-400 mt-1'>{ region.name }</p>
                                         )
                                     }) }
                             </Accordion.AccordionContent>
@@ -64,20 +62,13 @@ export function ConfigMenu({ isconfigPageOpen= false }: ConfigMenuProps) {
                             <Accordion.AccordionContent className='max-h-32 overflow-y-auto  bg-zinc-200 px-4 rounded-md data-[state="open"]:animate-open-accordion data-[state="closed"]:animate-close-accordion'>
                                 { capitalsDatabase.map((capital) => {
                                     return (
-                                        <p className='font-semibold cursor-pointer hover:text-orange-400 mt-1'>{ capital.name }</p>
+                                        <p  key={capital.id} className='font-semibold cursor-pointer hover:text-orange-400 mt-1'>{ capital.name }</p>
                                     )
                                 }) }
                             </Accordion.AccordionContent>
                         </Accordion.Item>
                     </Accordion.Root>
 
-                    {/* <span>Por região</span><br/>
-                    <span>Por estado</span><br/>
-                    <span>Por capital</span><br/>
-                    <ul>
-                        <li>Acre</li>
-                        <li>São paulo</li>
-                    </ul> */}
                     </div>
                 </div>
             </div>

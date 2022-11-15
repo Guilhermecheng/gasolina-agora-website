@@ -38,7 +38,7 @@ export function FaqBlock() {
                 Dúvidas frequentes
             </span>
         
-            <Accordion.Root type='single' collapsible className='w-full max-w-[940px] mx-20 rounded-xl border border-[#B1B1B1] shadow-2xl bg-zinc-100'>
+            <Accordion.Root type='single' collapsible className='w-[90%] max-w-[940px] mb-6 rounded-xl border border-[#B1B1B1] shadow-2xl bg-white'>
                 { faq.map((faqItem, i) => {
                     let borderRadius = ''
 
@@ -50,14 +50,14 @@ export function FaqBlock() {
 
                     return (
                         <Accordion.Item key={faqItem.id} value={faqItem.id}>
-                            <Accordion.Trigger className={`text-textmaincolor text-2xl font-semibold flex justify-between px-4 py-2 w-full bg-zinc-200 border border-b-[#B1B1B1]/70 ${borderRadius}`}>
+                            <Accordion.Trigger className={`text-textmaincolor text-2xl font-semibold flex justify-between px-4 py-2 w-full bg-zinc-100 border border-b-[#B1B1B1]/70 ${borderRadius}`}>
                                 {faqItem.question}
 
                                 {/* { props.data-state === 'open' ?  <Plus size={32} weight="bold" /> : <Minus size={32} weight="bold" /> } */}
                             </Accordion.Trigger>
 
-                            <Accordion.Content className='h-full text-textmaincolor px-4 my-4 opacity-1 data-[state="open"]:animate-open-accordion data-[state="closed"]:animate-close-accordion data-[state="closed"]:opacity-0'>
-                                {faqItem.answer.map((paragraph, i) => { return <p key={i} className='mt-2'>{ paragraph }</p> })}
+                            <Accordion.Content className='h-full text-textmaincolor px-8 my-8 opacity-1 text-justify data-[state="open"]:animate-open-accordion data-[state="closed"]:animate-close-accordion data-[state="closed"]:opacity-0'>
+                                {faqItem.answer.map((paragraph, i) => { return <p key={i} className='mt-4'>{ paragraph }</p> })}
                             </Accordion.Content>
                         </Accordion.Item>
                     )

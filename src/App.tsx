@@ -8,6 +8,7 @@ import { MiniBanner } from './components/MiniBanner';
 import { FaqBlock } from './components/FaqBlock';
 import { Footer } from './components/Footer';
 import { Visualizer } from './components/Vizualizer';
+import { apiResp } from './utils/apiResp';
 
 function App() {
   // config page state
@@ -22,23 +23,32 @@ function App() {
   const [configLocationId, setconfigLocationId] = useState('Brasil');
   const [configLocationName, setconfigLocationName] = useState('Brasil');
 
-  let apiBody = `GASOLINA COMUM\\BRASIL`
+  const [apiResponse, setApiResponse] = useState<any | null>(null);
+
+  // let apiBody = `GASOLINA COMUM\\BRASIL`
+
 
   useEffect(() => {
 
-    const fetchData = async () => {
-      let response = await axios.post('https://us-central1-gasolina-agora.cloudfunctions.net/query_fuel', {
-        headers: {
-          'content-type': 'application/json',
-        },
-        data: {
-          'data_id': `GASOLINA COMUM\\BRASIL`
-        }
-      })
-      console.log(response)
-    }
+    // const fetchData = async () => {
+    //   let config = {
+    //     method: 'POST',
+    //     url: 'https://us-central1-gasolina-agora.cloudfunctions.net/query_fuel',
+    //     headers: {
+    //       'content-type': 'application/json',
+    //     },
+    //     data: {
+    //       data_id: `GNV\\BRASIL\\NORDESTE`,
+    //     },
+    //   };
+    
+    //   let response = await axios(config);
+    //   console.log(response.data)
+    // }
 
-    fetchData()
+    // fetchData()
+    let result = apiResp.result;
+    setTimeout(() => setApiResponse(result), 5000);
 
   }, [])
 
@@ -67,6 +77,7 @@ function App() {
             setisConfigPageOpen={setisConfigPageOpen}
             configFuelTypeName={configFuelTypeName}
             configLocationName={configLocationName}
+            priceData={apiResponse}
           />
 
         </div>
@@ -76,7 +87,7 @@ function App() {
         <AboutUsBlock />
       </section>
 
-      <section className='w-full  flex flex-col items-center mb-8'>
+      <section className='w-full flex flex-col items-center mb-8'>
         <FaqBlock />
       </section>
 

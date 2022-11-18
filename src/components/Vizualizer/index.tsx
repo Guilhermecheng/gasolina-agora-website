@@ -9,6 +9,21 @@ interface VizualizerProps {
 
     configFuelTypeName: string;
     configLocationName: string;
+
+    priceData: {
+        data_id: string,
+		deviation: number,
+		end_date: string,
+		initial_date: string,
+		measure_unit: string,
+		price_average: number,
+		price_max: number,
+		price_min: number,
+		product_name: string,
+		scope: string,
+		scope_description: string,
+		stations: number
+    } | null;
 }
 
 export function Visualizer({
@@ -16,7 +31,9 @@ export function Visualizer({
     setisConfigPageOpen,
 
     configFuelTypeName,
-    configLocationName 
+    configLocationName,
+
+    priceData = null
 }: VizualizerProps) {
 
     return (
@@ -52,7 +69,7 @@ export function Visualizer({
             { isconfigPageOpen ? (
                 <ConfigMenu  />
             ) : (
-                <PriceBlock />
+                <PriceBlock priceData={priceData} />
             ) }
         </>
     )

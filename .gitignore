@@ -23,4 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-apiResp.ts
+# apiResp.ts

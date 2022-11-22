@@ -7,8 +7,21 @@ interface VizualizerProps {
     isconfigPageOpen?: boolean;
     setisConfigPageOpen: (isconfigPageOpen: boolean) => void;
 
-    configFuelTypeName: string;
-    configLocationName: string;
+    fuelConfig: {
+        configFuelTypeId: string;
+        setConfigFuelTypeId: (variable: string) => void;
+        configFuelTypeName: string;
+        setConfigFuelTypeName: (variable: string) => void;
+    };
+
+    locationConfig: {
+        configLocationType: string;
+        setconfigLocationType: (variable: string) => void;
+        configLocationId: string;
+        setconfigLocationId: (variable: string) => void;
+        configLocationName: string;
+        setconfigLocationName: (variable: string) => void;
+    };
 
     priceData: {
         data_id: string,
@@ -27,11 +40,11 @@ interface VizualizerProps {
 }
 
 export function Visualizer({
-    isconfigPageOpen = false,
+    isconfigPageOpen = false, // page config to set default state
     setisConfigPageOpen,
 
-    configFuelTypeName,
-    configLocationName,
+    fuelConfig,
+    locationConfig,
 
     priceData = null
 }: VizualizerProps) {
@@ -47,11 +60,11 @@ export function Visualizer({
                 ) : (
                     <div id="config-block" className=" w-[90%] flex flex-col items-start md:items-center justify-center px-8 md:space-x-4 space-y-2 md:flex-row whitespace-nowrap overflow-hidden">
                         <div className='w-full flex items-center text-base sm:text-2xl lg:text-3xl font-semibold'>
-                        Combustível: <span className='text-orange-400 ml-2'>{ configFuelTypeName }</span>
+                        Combustível: <span className='text-orange-400 ml-2'>{ fuelConfig.configFuelTypeName }</span>
                         </div>
 
                         <div className='w-[50%] flex items-center text-base sm:text-2xl lg:text-3xl font-semibold'>
-                        Localidade: <span className='text-orange-400 ml-2 '>{ configLocationName }</span>
+                        Localidade: <span className='text-orange-400 ml-2 '>{ locationConfig.configLocationName }</span>
                         </div>
                     </div>
                 ) }
@@ -67,7 +80,7 @@ export function Visualizer({
             </div>
 
             { isconfigPageOpen ? (
-                <ConfigMenu  />
+                <ConfigMenu configState={{ fuelConfig, locationConfig }} setisConfigPageOpen={setisConfigPageOpen} />
             ) : (
                 <PriceBlock priceData={priceData} />
             ) }

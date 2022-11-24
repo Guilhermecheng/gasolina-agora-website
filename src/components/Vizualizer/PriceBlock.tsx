@@ -19,6 +19,19 @@ interface PriceBlockProps {
 
 export function PriceBlock({ priceData }: PriceBlockProps) {
 
+    /* -- data formatting -- */
+    const formattedPriceAverage = priceData?.price_average.toLocaleString("pt-BR", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+    const formattedMinPrice = priceData?.price_min.toLocaleString("pt-BR", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+    const formattedMaxPrice = priceData?.price_max.toLocaleString("pt-BR", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+    let formattedInitialDate = '01/01/1900';
+    let formattedEndDate = '01/01/1900';
+
+    // dates
+    if(priceData) {
+        formattedInitialDate = new Date(priceData?.initial_date).toLocaleDateString("pt-BR");
+        formattedEndDate = new Date(priceData?.end_date).toLocaleDateString("pt-BR");
+    }
+
     return (
 		<div id='price-block-main' className='flex flex-col items-center text-textmaincolor mt-6 transition-height duration-300'>
             <span id='price-block-title' className='text-3xl md:text-4xl px-4 font-semibold'>
@@ -28,7 +41,7 @@ export function PriceBlock({ priceData }: PriceBlockProps) {
             <div className='text-4xl md:text-5xl font-semibold mt-10'>
                 { priceData ? (
                     <>
-                        R$ <span className='text-7xl md:text-8xl text-orange-400'>{ priceData.price_average }</span> /litro 
+                        R$ <span className='text-7xl md:text-8xl text-orange-400'>{ formattedPriceAverage }</span> /litro 
                     </>
                 ) : (
                     <div className="w-64 md:w-80 h-20">
@@ -37,13 +50,13 @@ export function PriceBlock({ priceData }: PriceBlockProps) {
                 ) }
             </div>
 
-            <div id='more-info-block' className='flex flex-col items-center justify-center mt-12 px-6 text-lg sm:text-xl md:text-2xl font-semibold'>
+            <div id='more-info-block' className='flex flex-col items-center justify-center mt-12 px-6 text-lg md:text-xl lg:text-2xl font-semibold'>
               <div id="min-max-prices" className='flex flex-col w-auto justify-center items-center md:flex-row space-y-2 md:space-y-0 md:space-x-8'>
                     { priceData ? (
                         <p id='min-price' className="text-center">
                             Mínimo:&nbsp;
                             <span className='text-orange-400'>
-                                R$ { priceData.price_min } / litro
+                                R$ { formattedMinPrice } / litro
                             </span>
                             <a className="cursor-pointer">&nbsp;(onde?)</a>
                         </p>
@@ -57,7 +70,7 @@ export function PriceBlock({ priceData }: PriceBlockProps) {
                         <p id='max-price' className="text-center">
                             Máximo:&nbsp;
                             <span className='text-orange-400'>
-                                R$ { priceData.price_max } / litro
+                                R$ { formattedMaxPrice } / litro
                             </span>
                             <a className="cursor-pointer">&nbsp;(onde?)</a>
                         </p>
@@ -72,7 +85,7 @@ export function PriceBlock({ priceData }: PriceBlockProps) {
                     { priceData ? (
                         <>
                             <span id='info-part' className='text-base sm:text-lg md:text-xl font-semibold'>
-                                Valores coletados em 1000 postos de 01/10/2022 a 02/11/2022
+                                { `Valores coletados em 1000 postos de ${formattedInitialDate} a ${formattedEndDate}` }
                             </span>
                             <span id='font-part' className='text-zinc-400 text-sm sm:text-base md:text-lg font-semibold'>
                                 Fonte: ANP - Agência Nacional do Petróleo, Gás Natural e Biocombustíveis

@@ -78,7 +78,7 @@ function App() {
         </div>
       </section>
 
-      <section id='section2' className='min-h-[300px] flex flex-col items-center relative'>
+      <section id='section2' className={`${ isconfigPageOpen ? 'h-[600px] md:h-[300px] lg:h-[300px]' : 'h-[360px] sm:h-[340px] md:h-[300px]' } flex flex-col items-center relative`}>
         <div id='price-and-config-block' className='z-10 absolute top-[-196px] max-w-[940px] w-[90%] mx-20 min-h-[450px] text-textmaincolor rounded-xl border border-[#B1B1B1] shadow-2xl bg-zinc-100'> {/* verify if w-container or w-full is better*/}
 
           <Visualizer

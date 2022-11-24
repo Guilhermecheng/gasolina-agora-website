@@ -36,9 +36,14 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
         }
     }
 
-    function setNewLocation(locationId: string) {
+    function setNewLocation(locationId: string, locationName: string, locationType: string) {
         locationConfig.setconfigLocationId(locationId);
+        locationConfig.setconfigLocationType(locationType);
+        locationConfig.setconfigLocationName(locationName);
+        setisConfigPageOpen(false);
     }
+
+    console.log(locationConfig.configLocationId)
     
     return (
         <div id='config-menu' className={`flex flex-col items-center text-textmaincolor mt-6 `}>
@@ -52,7 +57,7 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
                             return (
                                 <li 
                                     key={fuel.id} 
-                                    className={`w-full flex justify-center  text-zinc-100 text-xl font-semibold cursor-pointer rounded my-1 hover:bg-orange-400 ${ fuel.id === fuelConfig.configFuelTypeId ? 'bg-textmaincolor' : 'bg-zinc-400'}`}
+                                    className={`w-full flex justify-center text-zinc-100 text-xl font-semibold cursor-pointer rounded my-1 hover:bg-orange-400 ${ fuel.id === fuelConfig.configFuelTypeId ? 'bg-textmaincolor' : 'bg-neutral-400'}`}
                                     onClick={() => setNewFuel(fuel.id) }
                                 >
                                     { fuel.name }
@@ -65,22 +70,28 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
                     <h2 className="text-2xl font-semibold">Localidade</h2>
 
                     <div className="block w-80 bg-zinc-100 p-6">
-                    <h2 className={`w-full flex justify-center text-zinc-100 text-xl font-semibold cursor-pointer rounded my-1 hover:bg-orange-400 ${ locationConfig.configLocationId === 'brasil' ? 'bg-textmaincolor' : 'bg-zinc-400'}`}>Brasil</h2>
+                    <h2 
+                        className={`w-full flex justify-center text-zinc-100 text-xl font-semibold cursor-pointer rounded my-1 hover:bg-orange-400 ${ locationConfig.configLocationId === 'brasil' ? 'bg-textmaincolor' : 'bg-neutral-400'}`}
+                        onClick={() => setNewLocation('brasil', 'Brasil', 'general')}
+                    >
+                        Brasil
+                    </h2>
 
                     <Accordion.Root type="single" defaultValue='region' collapsible>
                         <Accordion.Item value='region'>
-                            <Accordion.AccordionTrigger className={`w-full flex justify-center bg-zinc-400 text-zinc-100 text-xl font-semibold cursor-pointer rounded my-1 hover:bg-orange-400 data-[state="open"]:bg-orange-400`}>
+                            <Accordion.AccordionTrigger className={`w-full flex justify-center bg-neutral-400 text-zinc-100 text-xl font-semibold cursor-pointer rounded my-1 hover:bg-orange-400 data-[state="open"]:bg-orange-400`}>
                                 Por região
                             </Accordion.AccordionTrigger>
 
                             <Accordion.AccordionContent className='max-h-32 overflow-y-auto bg-zinc-200 px-4 rounded-md data-[state="open"]:animate-open-accordion data-[state="closed"]:animate-close-accordion'>
-                                { statesDatabase.map((state) => {
+                                { regionalDatabase.map((region) => {
                                     return (
                                         <p  
-                                            key={state.id} 
-                                            className={`font-semibold cursor-pointer hover:text-orange-400 mt-1 ${ state.id === locationConfig.configLocationId ? 'text-textmaincolor' : 'text-zinc-600'}`}
+                                            key={region.id} 
+                                            className={`font-semibold cursor-pointer hover:text-orange-400 mt-1 text-zinc-600 px-2 rounded ${ region.id === locationConfig.configLocationId ? 'bg-textmaincolor text-zinc-200 py-1' : 'text-zinc-600'}`}
+                                            onClick={() => setNewLocation(region.id, region.name, region.type)}
                                         >
-                                            { state.name }
+                                            { region.name }
                                         </p>
                                     )
                                 }) }
@@ -88,18 +99,19 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
                         </Accordion.Item>
 
                         <Accordion.Item value='state'>
-                            <Accordion.AccordionTrigger className={`w-full flex justify-center bg-zinc-400 text-zinc-100 text-xl font-semibold cursor-pointer rounded my-1 hover:bg-orange-400 data-[state="open"]:bg-orange-400`}>
+                            <Accordion.AccordionTrigger className={`w-full flex justify-center bg-neutral-400 text-zinc-100 text-xl font-semibold cursor-pointer rounded my-1 hover:bg-orange-400 data-[state="open"]:bg-orange-400`}>
                                 Por estado
                             </Accordion.AccordionTrigger>
 
                             <Accordion.AccordionContent className='max-h-32 overflow-y-auto  bg-zinc-200 px-4 rounded-md data-[state="open"]:animate-open-accordion data-[state="closed"]:animate-close-accordion'>
-                                { regionalDatabase.map((region) => {
+                                { statesDatabase.map((state) => {
                                         return (
                                             <p  
-                                                key={region.id} 
-                                                className={`font-semibold cursor-pointer hover:text-orange-400 mt-1 ${ region.id === locationConfig.configLocationId ? 'text-textmaincolor' : 'text-zinc-600'}`}
+                                                key={state.id} 
+                                                className={`font-semibold cursor-pointer hover:text-orange-400 mt-1 text-zinc-600 px-2 rounded ${ state.id === locationConfig.configLocationId ? 'bg-textmaincolor text-zinc-200 py-1' : 'text-zinc-600'}`}
+                                                onClick={() => setNewLocation(state.id, state.name, state.type)}
                                             >
-                                                { region.name }
+                                                { state.name }
                                             </p>
                                         )
                                     }) }
@@ -107,7 +119,7 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
                         </Accordion.Item>
 
                         <Accordion.Item value='capital'>
-                            <Accordion.AccordionTrigger className={`w-full flex justify-center bg-zinc-400 text-zinc-100 text-xl font-semibold cursor-pointer rounded my-1 hover:bg-orange-400 data-[state="open"]:bg-orange-400`}>
+                            <Accordion.AccordionTrigger className={`w-full flex justify-center bg-neutral-400 text-zinc-100 text-xl font-semibold cursor-pointer rounded my-1 hover:bg-orange-400 data-[state="open"]:bg-orange-400`}>
                                 Por capital
                             </Accordion.AccordionTrigger>
 
@@ -116,7 +128,8 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
                                     return (
                                         <p  
                                             key={capital.id} 
-                                            className={`font-semibold cursor-pointer hover:text-orange-400 mt-1 ${ capital.id === locationConfig.configLocationId ? 'text-textmaincolor' : 'text-zinc-600'}`}
+                                            className={`font-semibold cursor-pointer hover:text-orange-400 mt-1 text-zinc-600 px-2 rounded ${ capital.id === locationConfig.configLocationId ? 'bg-textmaincolor text-zinc-200 py-1' : 'text-zinc-600'}`}
+                                            onClick={() => setNewLocation(capital.id, capital.name, capital.type)}
                                         >
                                             { capital.name }
                                         </p>

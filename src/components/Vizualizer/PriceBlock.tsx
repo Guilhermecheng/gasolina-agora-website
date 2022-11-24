@@ -40,7 +40,7 @@ export function PriceBlock({ priceData }: PriceBlockProps) {
             <div id='more-info-block' className='flex flex-col items-center justify-center mt-12 px-6 text-lg sm:text-xl md:text-2xl font-semibold'>
               <div id="min-max-prices" className='flex flex-col w-auto justify-center items-center md:flex-row space-y-2 md:space-y-0 md:space-x-8'>
                     { priceData ? (
-                        <p id='min-price'>
+                        <p id='min-price' className="text-center">
                             Mínimo:&nbsp;
                             <span className='text-orange-400'>
                                 R$ { priceData.price_min } / litro
@@ -54,8 +54,8 @@ export function PriceBlock({ priceData }: PriceBlockProps) {
                     ) }
 
                     { priceData ? (
-                        <p id='max-price'>
-                            Mínimo:&nbsp;
+                        <p id='max-price' className="text-center">
+                            Máximo:&nbsp;
                             <span className='text-orange-400'>
                                 R$ { priceData.price_max } / litro
                             </span>
@@ -80,7 +80,7 @@ export function PriceBlock({ priceData }: PriceBlockProps) {
                         </>
 
                     ) : (
-                        <div className="w-[360px] md:w-[800px] h-[70px]">
+                        <div className="w-[360px] md:w-[480px] lg:w-[800px] h-[70px]">
                             <Skeleton />
                         </div>
                     ) }

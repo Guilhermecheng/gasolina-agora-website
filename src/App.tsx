@@ -8,7 +8,7 @@ import { MiniBanner } from './components/MiniBanner';
 import { FaqBlock } from './components/FaqBlock';
 import { Footer } from './components/Footer';
 import { Visualizer } from './components/Vizualizer';
-import { apiResp } from './utils/apiResp';
+import { apiRespGasolComum, apiRespGLP } from './utils/apiResp';
 import { GlobalContext } from './context/ConfigContext';
 
 function App() {
@@ -56,7 +56,7 @@ function App() {
     // }
 
     // fetchData()
-    let result = apiResp.result;
+    let result = apiRespGasolComum.result;
     setTimeout(() => setApiResponse(result), 5000);
 
   }, [])

@@ -93,7 +93,7 @@ export function PriceBlock({ priceData }: PriceBlockProps) {
                         </>
 
                     ) : (
-                        <div className="w-[360px] md:w-[480px] lg:w-[800px] h-[70px]">
+                        <div className="w-[320px] md:w-[480px] lg:w-[800px] h-[70px]">
                             <Skeleton />
                         </div>
                     ) }

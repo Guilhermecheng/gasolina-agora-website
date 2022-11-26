@@ -50,14 +50,16 @@ export function FaqBlock() {
 
                     return (
                         <Accordion.Item key={faqItem.id} value={faqItem.id}>
-                            <Accordion.Trigger className={`text-textmaincolor text-2xl font-semibold flex justify-between px-4 py-2 w-full bg-zinc-100 border border-b-[#B1B1B1]/70 ${borderRadius}`}>
+                            <Accordion.Trigger className={`text-textmaincolor text-xl sm:text-2xl font-semibold flex justify-between px-4 py-2 w-full bg-zinc-100 border border-b-[#B1B1B1]/70 ${borderRadius}`}>
                                 {faqItem.question}
 
                                 {/* { props.data-state === 'open' ?  <Plus size={32} weight="bold" /> : <Minus size={32} weight="bold" /> } */}
                             </Accordion.Trigger>
 
-                            <Accordion.Content className='h-full text-textmaincolor px-8 my-8 opacity-1 text-justify data-[state="open"]:animate-open-accordion data-[state="closed"]:animate-close-accordion data-[state="closed"]:opacity-0'>
-                                {faqItem.answer.map((paragraph, i) => { return <p key={i} className='mt-4'>{ paragraph }</p> })}
+                            <Accordion.Content className='h-full text-textmaincolor px-8 my-8 text-justify transition transform-300 data-[state="open"]:opacity-1  data-[state="open"]:animate-open-accordion data-[state="closed"]:animate-close-accordion data-[state="closed"]:opacity-0'>
+                                <div className=''>
+                                    {faqItem.answer.map((paragraph, i) => { return <p key={i} className='mt-4'>{ paragraph }</p> })}
+                                </div>
                             </Accordion.Content>
                         </Accordion.Item>
                     )

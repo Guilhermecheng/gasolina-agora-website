@@ -26,6 +26,7 @@ module.exports = {
       },
       transitionProperty: {
         height: 'height',
+        opacity: 'opacity',
       },
       keyframes: {
         'open-accordion': {

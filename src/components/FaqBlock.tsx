@@ -56,7 +56,7 @@ export function FaqBlock() {
                                 {/* { props.data-state === 'open' ?  <Plus size={32} weight="bold" /> : <Minus size={32} weight="bold" /> } */}
                             </Accordion.Trigger>
 
-                            <Accordion.Content className='h-full text-textmaincolor px-8 my-8 text-justify transition transform-300 data-[state="open"]:opacity-1  data-[state="open"]:animate-open-accordion data-[state="closed"]:animate-close-accordion data-[state="closed"]:opacity-0'>
+                            <Accordion.Content className='h-full text-textmaincolor px-8 my-8 text-justify text-base sm:text-lg transition duration-500 data-[state="open"]:opacity-1 data-[state="open"]:animate-open-accordion data-[state="closed"]:animate-close-accordion data-[state="closed"]:opacity-0'>
                                 <div className=''>
                                     {faqItem.answer.map((paragraph, i) => { return <p key={i} className='mt-4'>{ paragraph }</p> })}
                                 </div>

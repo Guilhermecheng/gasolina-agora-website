@@ -104,7 +104,7 @@ function App() {
         </div>
       </section>
 
-      <section id='section3' className='w-full min-h-[420px] flex flex-col items-center bg-orange-background'>
+      <section id='section3' className='w-full min-h-[420px] flex flex-col items-center bg-orange-background bg-center bg-no-repeat bg-cover'>
         <AboutUsBlock />
       </section>
 

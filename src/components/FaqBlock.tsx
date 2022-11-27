@@ -12,14 +12,14 @@ const faq = [
     },
     {
         id: 'faq-2',
-        question: 'Etanol ou gasolia? Qual vale mais a pena?',
+        question: 'Etanol ou gasolina, qual vale mais a pena?',
         answer: [
             'O etanol vale a pena quando custar até 70% do valor da gasolina - isto é, o biocombustível tem, em média, 70% do poder calorífico da gasolina, logo para saber se o etanol mais é vantajoso ou não, basta multiplicar o valor do litro da gasolina por 0,7. Se o valor resultante for menor que o do litro do etanol, é melhor abastecer com gasolina.'
         ],
     },
     {
         id: 'faq-3',
-        question: 'Variáveis que influenciam no preço do combustível?',
+        question: 'Variáveis que influenciam no preço do combustível',
         answer: ['No geral, a composição do preço do combustível vem de duas varáveis muito voláteis: a alta no valor do barril de petróleo e a cotação do dólar. Além disso, políticas públicas de subsídios e impostos e a localidade do ponto de venda afetam diretamente na composição final do preço.'],
     },
     // {
@@ -56,7 +56,7 @@ export function FaqBlock() {
                                 {/* { props.data-state === 'open' ?  <Plus size={32} weight="bold" /> : <Minus size={32} weight="bold" /> } */}
                             </Accordion.Trigger>
 
-                            <Accordion.Content className='h-full text-textmaincolor px-8 my-8 text-justify text-base sm:text-lg transition duration-500 data-[state="open"]:opacity-1 data-[state="open"]:animate-open-accordion data-[state="closed"]:animate-close-accordion data-[state="closed"]:opacity-0'>
+                            <Accordion.Content className='h-full text-textmaincolor px-8 my-8 text-base sm:text-sl transition duration-500 data-[state="open"]:opacity-1 data-[state="open"]:animate-open-accordion data-[state="closed"]:animate-close-accordion data-[state="closed"]:opacity-0'>
                                 <div className=''>
                                     {faqItem.answer.map((paragraph, i) => { return <p key={i} className='mt-4'>{ paragraph }</p> })}
                                 </div>

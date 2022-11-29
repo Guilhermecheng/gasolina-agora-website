@@ -112,7 +112,7 @@ function App() {
         <FaqBlock />
       </section>
 
-      <section className='w-full h-[420px] flex flex-col items-center'>
+      <section className='w-full flex flex-col items-center bg-gray-background bg-center bg-no-repeat bg-cover'>
         <Footer />
       </section>
     </div>

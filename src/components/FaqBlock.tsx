@@ -19,14 +19,14 @@ const faq = [
     },
     {
         id: 'faq-3',
-        question: 'Variáveis que influenciam no preço do combustível',
+        question: 'Variáveis que influenciam no preço',
         answer: ['No geral, a composição do preço do combustível vem de duas varáveis muito voláteis: a alta no valor do barril de petróleo e a cotação do dólar. Além disso, políticas públicas de subsídios e impostos e a localidade do ponto de venda afetam diretamente na composição final do preço.'],
     },
-    // {
-    //     id: 'faq-4',
-    //     question: '',
-    //     answer: '',
-    // },
+    {
+        id: 'faq-4',
+        question: 'Quais os combustíveis mais utilizados?',
+        answer: ['asd'],
+    },
 ]
 
 
@@ -37,6 +37,10 @@ export function FaqBlock() {
             <span id='price-block-title' className='text-4xl text-textmaincolor font-semibold my-12'>
                 Dúvidas frequentes
             </span>
+
+            <p className='text-textmaincolor text-lg sm:text-xl w-[85%] sm:w-[90%] max-w-[940px] mx-10 justify-start mb-8'>
+                Um compilado das dúvidas mais frequentes de nossos usuários.
+            </p>
         
             <Accordion.Root type='single' collapsible className='w-[90%] max-w-[940px] mb-6 rounded-xl border border-[#B1B1B1] shadow-2xl bg-white'>
                 { faq.map((faqItem, i) => {
@@ -50,13 +54,13 @@ export function FaqBlock() {
 
                     return (
                         <Accordion.Item key={faqItem.id} value={faqItem.id}>
-                            <Accordion.Trigger className={`text-textmaincolor text-xl sm:text-2xl font-semibold flex justify-between px-4 py-2 w-full bg-zinc-100 border border-b-[#B1B1B1]/70 ${borderRadius}`}>
+                            <Accordion.Trigger className={`text-textmaincolor text-lg sm:text-2xl font-semibold flex justify-between text-start px-4 py-2 w-full bg-zinc-100 border border-b-[#B1B1B1]/70 ${borderRadius}`}>
                                 {faqItem.question}
 
                                 {/* { props.data-state === 'open' ?  <Plus size={32} weight="bold" /> : <Minus size={32} weight="bold" /> } */}
                             </Accordion.Trigger>
 
-                            <Accordion.Content className='h-full text-textmaincolor px-8 my-8 text-base sm:text-sl transition duration-500 data-[state="open"]:opacity-1 data-[state="open"]:animate-open-accordion data-[state="closed"]:animate-close-accordion data-[state="closed"]:opacity-0'>
+                            <Accordion.Content className='h-full text-textmaincolor px-8 my-8 text-base sm:text-lg transition duration-500 data-[state="open"]:opacity-1 data-[state="open"]:animate-open-accordion data-[state="closed"]:animate-close-accordion data-[state="closed"]:opacity-0'>
                                 <div className=''>
                                     {faqItem.answer.map((paragraph, i) => { return <p key={i} className='mt-4'>{ paragraph }</p> })}
                                 </div>

@@ -58,7 +58,7 @@ export function AboutUsBlock() {
                 O Gasolina Agora
             </span>
 
-            <div className="max-w-[940px] mx-12 text-base sm:text-lg font-normal space-y-4 mb-8">
+            <div className="max-w-[940px] mx-12 text-base sm:text-lg font-normal space-y-4 mb-10">
                 { texto.map((textPart, i) => {
                     if(textPart.type === 'paragraph') {
                         return (
@@ -66,7 +66,7 @@ export function AboutUsBlock() {
                         )
                     } else if(textPart.type === 'subtitle-heading') {
                         return (
-                            <h3 key={i} className="font-semibold font-2xl pt-6">{ textPart.text }</h3>
+                            <h3 key={i} className="font-semibold text-2xl pt-6">{ textPart.text }</h3>
                         )
                     }
                 }) }

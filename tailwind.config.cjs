@@ -9,6 +9,7 @@ module.exports = {
       backgroundImage: {
         'purple-background': "url('/purple_background.png')",
         'orange-background': "url('/orange_background.png')",
+        'gray-background': "url('/gray_background.png')",
         'footer-gradient': 'linear-gradient(180deg, #3D3070 0%, #3D3070 69.27%, #251D43 100%)',
       },
       colors: {

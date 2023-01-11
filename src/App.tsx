@@ -38,7 +38,11 @@ function App() {
 
 
   useEffect(() => {
-
+    /*
+      Testing other API
+      fetch('https://api.github.com/users/Guilhermecheng/repos').then((resp) => resp.json()).then((data) => console.log(data))
+    
+    */
     // const fetchData = async () => {
     //   let config = {
     //     method: 'POST',

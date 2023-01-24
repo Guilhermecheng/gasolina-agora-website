@@ -43,23 +43,47 @@ function App() {
       fetch('https://api.github.com/users/Guilhermecheng/repos').then((resp) => resp.json()).then((data) => console.log(data))
     
     */
-    // const fetchData = async () => {
-    //   let config = {
-    //     method: 'POST',
-    //     url: 'https://us-central1-gasolina-agora.cloudfunctions.net/query_fuel',
-    //     headers: {
-    //       'content-type': 'application/json',
-    //     },
-    //     data: {
-    //       data_id: `GNV\\BRASIL\\NORDESTE`,
-    //     },
-    //   };
+    const fetchData = async () => {
+      // let config = {
+      //   method: 'POST',
+      //   url: 'https://us-central1-gasolina-agora.cloudfunctions.net/query_fuel',
+      //   headers: {
+      //     'content-type': 'application/json',
+      //   },
+      //   data: {
+      //     "data_id": `GNV\\BRASIL\\NORDESTE`,
+      //   },
+      // };
     
-    //   let response = await axios(config);
-    //   console.log(response.data)
-    // }
+      // let response = await axios(config);
+      //  console.log(response.data)
 
-    // fetchData()
+      let response = await fetch('https://us-central1-gasolina-agora.cloudfunctions.net/query_fuel', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              'data_id': "GASOLINA COMUM\\BRASIL"
+          }),
+      })
+      console.log(response)
+      
+      // https://us-central1-quickstart-1600134625009.cloudfunctions.net/gasol-agr-teste
+      // https://[MY-BUCKET].storage.googleapis.com/[OBJECT-PATH]
+      // let resp2 = await fetch('https://us-central1-quickstart-1600134625009.cloudfunctions.net/gasol-agr-teste', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      // })
+      // console.log(resp2)
+      // let data = await response.json();
+      // return data;
+    }
+
+    fetchData()
     let result = apiRespGasolComum.result;
     setTimeout(() => setApiResponse(result), 5000);
 

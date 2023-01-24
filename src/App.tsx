@@ -58,27 +58,28 @@ function App() {
       // let response = await axios(config);
       //  console.log(response.data)
 
-      let response = await fetch('https://us-central1-gasolina-agora.cloudfunctions.net/query_fuel', {
-          method: 'POST',
-          mode: 'cors',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-              'data_id': "GASOLINA COMUM\\BRASIL"
-          }),
-      })
-      console.log(response)
+      // let response = await fetch('https://us-central1-gasolina-agora.cloudfunctions.net/query_fuel', {
+      //     method: 'POST',
+      //     mode: 'cors',
+      //     headers: {
+      //         'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify({
+      //         'data_id': "GASOLINA COMUM\\BRASIL"
+      //     }),
+      // })
+      // console.log(response)
       
       // https://us-central1-quickstart-1600134625009.cloudfunctions.net/gasol-agr-teste
       // https://[MY-BUCKET].storage.googleapis.com/[OBJECT-PATH]
-      // let resp2 = await fetch('https://us-central1-quickstart-1600134625009.cloudfunctions.net/gasol-agr-teste', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      // })
-      // console.log(resp2)
+      let resp2 = await fetch('https://us-central1-quickstart-1600134625009.cloudfunctions.net/gasol-agr-teste/jsonData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      let data2 = await resp2.json();
+      console.log(data2)
       // let data = await response.json();
       // return data;
     }

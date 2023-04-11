@@ -33,7 +33,7 @@ const faq = [
 export function FaqBlock() {
 
     return (
-        <div className="bg-white">
+        <>
             <span id='price-block-title' className='text-4xl text-textmaincolor font-semibold my-12'>
                 Dúvidas frequentes
             </span>
@@ -69,6 +69,6 @@ export function FaqBlock() {
                     )
                 }) }
             </Accordion.Root>
-        </div>
+        </>
     )
 }

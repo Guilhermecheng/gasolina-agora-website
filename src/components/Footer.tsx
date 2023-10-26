@@ -19,7 +19,7 @@ export function Footer() {
     }, [])
 
     return (
-        <>
+        <section className='w-full flex flex-col items-center bg-gray-background bg-center bg-no-repeat bg-cover'>
             <div className="w-full h-full min-h-[250px]">
                 <div className=" sm:w-[90%] my-10 text-neutral-300 flex flex-col items-center space-y-6 md:space-y-0 md:space-x-4 md:grid md:grid-cols-2">
 
@@ -55,6 +55,6 @@ export function Footer() {
             <div className="w-full h-10 text-sm text-zinc-500 flex items-center justify-center bg-black">
                 © Gasolina Agora 2022. Todos os direitos reservados.
             </div>
-        </>
+        </section>
     )
 }

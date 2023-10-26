@@ -53,7 +53,7 @@ const texto = [
 export function AboutUsBlock() {
 
     return (
-        <>
+        <section id='section3' className='w-full min-h-[420px] flex flex-col items-center bg-orange-background bg-center bg-no-repeat bg-cover'>
             <span id='price-block-title' className='text-4xl font-semibold my-12'>
                 O Gasolina Agora
             </span>
@@ -71,6 +71,6 @@ export function AboutUsBlock() {
                     }
                 }) }
             </div>
-        </>
+        </section>
     )
 }

@@ -2,6 +2,8 @@ import './styles/main.css';
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
+import { capitalsDatabase, fuelDatabase, regionalDatabase, statesDatabase } from './utils/FuelLocHandlerDatabase';
+
 import { AboutUsBlock } from './components/AboutUsBlock';
 import { MiniBanner } from './components/MiniBanner';
 import { FaqBlock } from './components/FaqBlock';
@@ -24,6 +26,8 @@ function App() {
     setConfigFuelTypeId,
     configFuelTypeName,
     setConfigFuelTypeName,
+    fuelApiFetch,
+    setFuelApiFetch,
 
     configLocationType,
     setconfigLocationType,
@@ -31,31 +35,44 @@ function App() {
     setconfigLocationId,
     configLocationName,
     setconfigLocationName,
+    locationApiFetch,
+    setLocationApiFetch
    } = useContext(GlobalContext);
 
 
   useEffect(() => {
+    setApiResponse(null);
+
     const fetchData = async () => {
+      let locationApiBody: string = "";
+
+      if(typeof locationApiFetch !== 'string' && locationApiFetch !== '') {
+        locationApiBody = String(`\\`) + locationApiFetch.join(String(`\\`)).replace(/-/g, ' ');
+      } else if (locationApiFetch !== ''){
+        locationApiBody = String(`\\`) + locationApiFetch.replace(/-/g, ' ')
+      }
 
       // let response = await axios(config);
       // proxies: https://cors.sh/ ou https://cors-anywhere.herokuapp.com/ ou https://corsproxy.io/?
       let response = await axios.post('https://corsproxy.io/?https://us-central1-gasolina-agora.cloudfunctions.net/query_fuel', {
-        'data_id': `GASOLINA COMUM\\BRASIL`
+        'data_id': `${fuelApiFetch}\\BRASIL${locationApiBody}`
       },{
         headers: {
           'Content-Type':'application/json',
         }
       })
-      console.log(response)
-
-
+      return response.data
     }
 
-    fetchData();
-    let result = apiRespGasolComum.result;
-    setTimeout(() => setApiResponse(result), 5000);
+    fetchData().then(response => {
+      console.log(response)
+      setApiResponse(response.result);
+    });
+    // let result = apiRespGasolComum.result;
+    // setTimeout(() => setApiResponse(result), 5000);
+  }, [fuelApiFetch, locationApiFetch]);
 
-  }, [])
+  
 
   return (
     <div className="w-full text-white justify-center">
@@ -70,6 +87,8 @@ function App() {
           setConfigFuelTypeId,
           configFuelTypeName,
           setConfigFuelTypeName,
+          fuelApiFetch,
+          setFuelApiFetch,
         }}
         locationConfig={{
           configLocationType,
@@ -78,6 +97,8 @@ function App() {
           setconfigLocationId,
           configLocationName,
           setconfigLocationName,
+          locationApiFetch,
+          setLocationApiFetch
         }}
         priceData={apiResponse}
       />

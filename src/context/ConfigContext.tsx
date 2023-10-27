@@ -13,11 +13,13 @@ export const GlobalContext = createContext<any>(null);
 export const ConfigContext = (props: any) => {
     const [configFuelTypeId, setConfigFuelTypeId] = useState('gasolina');
     const [configFuelTypeName, setConfigFuelTypeName] = useState('Gasolina Comum');
+    const [fuelApiFetch, setFuelApiFetch] = useState('GASOLINA COMUM');
   
     // location states
     const [configLocationType, setconfigLocationType] = useState('general');
     const [configLocationId, setconfigLocationId] = useState('brasil');
     const [configLocationName, setconfigLocationName] = useState('Brasil');
+    const [locationApiFetch, setLocationApiFetch] = useState('');
 
     return (
         <GlobalContext.Provider
@@ -27,6 +29,8 @@ export const ConfigContext = (props: any) => {
                 setConfigFuelTypeId,
                 configFuelTypeName,
                 setConfigFuelTypeName,
+                fuelApiFetch,
+                setFuelApiFetch,
 
                 // location states and updaters
                 configLocationType,
@@ -35,6 +39,8 @@ export const ConfigContext = (props: any) => {
                 setconfigLocationId,
                 configLocationName,
                 setconfigLocationName,
+                locationApiFetch,
+                setLocationApiFetch
             }}
         >
                 { props.children }

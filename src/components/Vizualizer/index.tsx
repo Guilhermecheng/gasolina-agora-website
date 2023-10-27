@@ -12,6 +12,8 @@ interface VizualizerProps {
         setConfigFuelTypeId: (variable: string) => void;
         configFuelTypeName: string;
         setConfigFuelTypeName: (variable: string) => void;
+        fuelApiFetch: string;
+        setFuelApiFetch:(variable: string) => void;
     };
 
     locationConfig: {
@@ -21,6 +23,8 @@ interface VizualizerProps {
         setconfigLocationId: (variable: string) => void;
         configLocationName: string;
         setconfigLocationName: (variable: string) => void;
+        locationApiFetch: string | string[];
+        setLocationApiFetch: (variable: string | string[]) => void;
     };
 
     priceData: {

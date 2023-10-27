@@ -9,6 +9,8 @@ interface ConfigMenuProps {
             setConfigFuelTypeId: (variable: string) => void;
             configFuelTypeName: string;
             setConfigFuelTypeName: (variable: string) => void;
+            fuelApiFetch: string;
+            setFuelApiFetch:(variable: string) => void;
         };
     
         locationConfig: {
@@ -18,6 +20,8 @@ interface ConfigMenuProps {
             setconfigLocationId: (variable: string) => void;
             configLocationName: string;
             setconfigLocationName: (variable: string) => void;
+            locationApiFetch: string | string[];
+            setLocationApiFetch: (variable: string | string[]) => void;
         };
     };
 
@@ -29,14 +33,63 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
 
     function setNewFuel(fuelId: string) {
         const newFuel = fuelDatabase.find(fuel => fuel.id === fuelId)
+        console.log(newFuel);
         if(newFuel) {
             fuelConfig.setConfigFuelTypeId(newFuel.id);
             fuelConfig.setConfigFuelTypeName(newFuel.name)
+            fuelConfig.setFuelApiFetch(newFuel.apiFetch);
             setisConfigPageOpen(false);
         }
     }
 
     function setNewLocation(locationId: string, locationName: string, locationType: string) {
+        console.log(locationId, locationName, locationType)
+        switch(locationType) {
+            case 'general': 
+                locationConfig.setLocationApiFetch("")
+                // setTitleLoc('Brasil');
+                // setlocPronoun('no');
+                break;
+            
+                case 'region':
+                let regionData = regionalDatabase.find(region => region.id === locationId);
+                console.log(regionData)
+                if (regionData?.fetchSlug) {
+                    let fetchslug = regionData.fetchSlug.toUpperCase();
+                    locationConfig.setLocationApiFetch(fetchslug)
+                }
+                // setTitleLoc(regionData?.name);
+                // setlocPronoun('na');
+                break;
+        
+            case 'state':
+                let stateData = statesDatabase.find(region => region.id === locationId);
+                console.log(stateData)
+                if (stateData?.fetchSlug) {
+                    let fetchslug = stateData.fetchSlug.map(item => item.toUpperCase())
+                    locationConfig.setLocationApiFetch(fetchslug)
+                }
+                // setTitleLoc(stateData?.name);
+                // setlocPronoun(stateData?.pronoun);
+                break;
+        
+            case 'capital':
+                let capitalData = capitalsDatabase.find(region => region.id === locationId);
+                console.log(capitalData)
+                if (capitalData?.fetchSlug) {
+                    let fetchslug = capitalData.fetchSlug.map(item => item.toUpperCase())
+                    locationConfig.setLocationApiFetch(fetchslug)
+                }
+                // setTitleLoc(capitalData?.name);
+                // setlocPronoun('na cidade de');
+                break;
+        
+            default:
+                // setTitleLoc('Brasil');
+                // setlocPronoun('no');
+                break;
+        }
+
         locationConfig.setconfigLocationId(locationId);
         locationConfig.setconfigLocationType(locationType);
         locationConfig.setconfigLocationName(locationName);

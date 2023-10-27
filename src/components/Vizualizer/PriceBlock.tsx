@@ -1,4 +1,7 @@
+import { useContext, useEffect, useState } from "react";
 import { Skeleton } from "../Skeleton";
+import { GlobalContext } from "../../context/ConfigContext";
+import { fuelDatabase } from "../../utils/FuelLocHandlerDatabase";
 
 interface PriceBlockProps {
     priceData: {
@@ -18,18 +21,33 @@ interface PriceBlockProps {
 }
 
 export function PriceBlock({ priceData }: PriceBlockProps) {
+    const { configFuelTypeId } = useContext(GlobalContext);
+    const [measureUnit, setMeasureUnit] = useState('litro');
 
+    useEffect(() => {
+        const fuelUnit = fuelDatabase.find(fuel => fuel.id === configFuelTypeId);
+        if(fuelUnit?.measureUnit) {
+            setMeasureUnit(fuelUnit.measureUnit);
+        }
+    },[configFuelTypeId]);
+
+    console.log(priceData);
     /* -- data formatting -- */
-    const formattedPriceAverage = priceData?.price_average.toLocaleString("pt-BR", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
-    const formattedMinPrice = priceData?.price_min.toLocaleString("pt-BR", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
-    const formattedMaxPrice = priceData?.price_max.toLocaleString("pt-BR", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+    let formattedPriceAverage ;
+    let formattedMinPrice;
+    let formattedMaxPrice;
     let formattedInitialDate = '01/01/1900';
     let formattedEndDate = '01/01/1900';
 
+    // let pageTitle = `Preço ${fuelPronoun} ${titleFuel} ${locPronoun} ${titleLoc}`;
+
     // dates
     if(priceData) {
-        formattedInitialDate = new Date(priceData?.initial_date).toLocaleDateString("pt-BR");
-        formattedEndDate = new Date(priceData?.end_date).toLocaleDateString("pt-BR");
+        formattedPriceAverage = priceData?.price_average.toLocaleString("pt-BR", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+        formattedMinPrice = priceData?.price_min.toLocaleString("pt-BR", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+        formattedMaxPrice = priceData?.price_max.toLocaleString("pt-BR", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+        formattedInitialDate = new Date(priceData?.initial_date + "T00:00:00").toLocaleDateString("pt-BR");
+        formattedEndDate = new Date(priceData?.end_date + "T00:00:00").toLocaleDateString("pt-BR");
     }
 
     return (
@@ -41,7 +59,7 @@ export function PriceBlock({ priceData }: PriceBlockProps) {
             <div className='text-4xl md:text-5xl font-semibold mt-10'>
                 { priceData ? (
                     <>
-                        R$ <span className='text-7xl md:text-8xl text-orange-400'>{ formattedPriceAverage }</span> /litro 
+                        R$ <span className='text-7xl md:text-8xl text-orange-400'>{ formattedPriceAverage }</span> / { measureUnit } 
                     </>
                 ) : (
                     <div className="w-64 md:w-80 h-20">
@@ -56,7 +74,7 @@ export function PriceBlock({ priceData }: PriceBlockProps) {
                         <p id='min-price' className="text-center">
                             Mínimo:&nbsp;
                             <span className='text-orange-400'>
-                                R$ { formattedMinPrice } / litro
+                                R$ { formattedMinPrice } / { measureUnit }
                             </span>
                             <a className="cursor-pointer">&nbsp;(onde?)</a>
                         </p>
@@ -70,7 +88,7 @@ export function PriceBlock({ priceData }: PriceBlockProps) {
                         <p id='max-price' className="text-center">
                             Máximo:&nbsp;
                             <span className='text-orange-400'>
-                                R$ { formattedMaxPrice } / litro
+                                R$ { formattedMaxPrice } / { measureUnit }
                             </span>
                             <a className="cursor-pointer">&nbsp;(onde?)</a>
                         </p>

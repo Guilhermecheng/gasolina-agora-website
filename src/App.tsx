@@ -52,21 +52,29 @@ function App() {
         locationApiBody = String(`\\`) + locationApiFetch.replace(/-/g, ' ')
       }
 
-      // let response = await axios(config);
-      // proxies: https://cors.sh/ ou https://cors-anywhere.herokuapp.com/ ou https://corsproxy.io/?
-      let response = await axios.post('https://corsproxy.io/?https://us-central1-gasolina-agora.cloudfunctions.net/query_fuel', {
-        'data_id': `${fuelApiFetch}\\BRASIL${locationApiBody}`
-      },{
-        headers: {
-          'Content-Type':'application/json',
-        }
-      })
-      return response.data
+      try {
+        // let response = await axios(config);
+        // proxies: https://cors.sh/ ou https://cors-anywhere.herokuapp.com/ ou https://corsproxy.io/?
+        let response = await axios.post('https://corsproxy.io/?https://us-central1-gasolina-agora.cloudfunctions.net/query_fuel', {
+          'data_id': `${fuelApiFetch}\\BRASIL${locationApiBody}`
+        },{
+          headers: {
+            'Content-Type':'application/json',
+          }
+        })
+        return response.data
+      } catch (err) {
+        return "error";
+      }
     }
-
+    
     fetchData().then(response => {
       console.log(response)
-      setApiResponse(response.result);
+      if(response === "error") {
+        setApiResponse("error")
+      } else {
+        setApiResponse(response.result);
+      }
     });
     // let result = apiRespGasolComum.result;
     // setTimeout(() => setApiResponse(result), 5000);

@@ -17,7 +17,7 @@ interface PriceBlockProps {
 		scope: string,
 		scope_description: string,
 		stations: number
-    } | null;
+    } | null | "error";
 }
 
 export function PriceBlock({ priceData }: PriceBlockProps) {
@@ -40,7 +40,14 @@ export function PriceBlock({ priceData }: PriceBlockProps) {
     let formattedEndDate = '01/01/1900';
 
     // let pageTitle = `Preço ${fuelPronoun} ${titleFuel} ${locPronoun} ${titleLoc}`;
-
+    if(priceData === "error") {
+        return (
+            <div className="flex flex-col items-center justify-center text-xl md:text-2xl font-semibold pt-4 md:pt-8">
+                <h1>Ops.. parece que este valor não está disponível.</h1>
+                <h2>Tente novamente</h2>
+            </div>
+        )
+    }
     // dates
     if(priceData) {
         formattedPriceAverage = priceData?.price_average.toLocaleString("pt-BR", { maximumFractionDigits: 2, minimumFractionDigits: 2 });

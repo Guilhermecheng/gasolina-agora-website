@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Skeleton } from "../Skeleton";
-import { fuelDatabase } from "../../utils/FuelLocHandlerDatabase";
+import { fuelDatabase, regionalDatabase, statesDatabase } from "../../utils/FuelLocHandlerDatabase";
 import { useFuel } from "../../hooks/useFuel";
 
 interface PriceBlockProps {
@@ -21,16 +21,41 @@ interface PriceBlockProps {
 }
 
 export function PriceBlock({ priceData }: PriceBlockProps) {
-    const { fuelId } = useFuel();
+    const { fuelId, fuelName, locationType, locationId, locationName } = useFuel();
 
     const [measureUnit, setMeasureUnit] = useState('litro');
+    const [fuelPronoun, setFuelPronoun] = useState('da');
+    const [locationPronoun, setLocationPronoun] = useState('no')
 
     useEffect(() => {
-        const fuelUnit = fuelDatabase.find(fuel => fuel.id === fuelId);
-        if(fuelUnit?.measureUnit) {
-            setMeasureUnit(fuelUnit.measureUnit);
+        const fuelData = fuelDatabase.find(fuel => fuel.id === fuelId);
+
+        if(fuelData) {
+            setMeasureUnit(fuelData.measureUnit);
+            setFuelPronoun(fuelData.pronoun);
         }
-    },[fuelId]);
+
+        switch(locationType) {
+            case 'general':
+                setLocationPronoun('no');
+                break;
+
+            case 'region':
+                setLocationPronoun('na');
+                break;
+
+            case 'state':
+                let regionData = statesDatabase.find(region => region.id === locationId);
+                if(regionData) {
+                    setLocationPronoun(regionData?.pronoun);
+                }
+                break;
+
+            case 'capital':
+                setLocationPronoun('em');
+                break;
+        }
+    },[fuelId, locationId]);
 
     console.log(priceData);
     /* -- data formatting -- */
@@ -61,7 +86,7 @@ export function PriceBlock({ priceData }: PriceBlockProps) {
     return (
 		<div id='price-block-main' className='flex flex-col items-center text-textmaincolor mt-6 transition-height duration-300'>
             <span id='price-block-title' className='text-3xl md:text-4xl px-4 font-semibold'>
-                Preço da Gasolina no Brasil
+                Preço { fuelPronoun } { fuelName } { locationPronoun } { locationName }
             </span>
 
             <div className='text-4xl md:text-5xl font-semibold mt-10'>
@@ -111,7 +136,7 @@ export function PriceBlock({ priceData }: PriceBlockProps) {
                     { priceData ? (
                         <>
                             <span id='info-part' className='text-base sm:text-lg md:text-xl font-semibold'>
-                                { `Valores coletados em 1000 postos de ${formattedInitialDate} a ${formattedEndDate}` }
+                                { `Valores coletados em ${ priceData.stations } postos de ${formattedInitialDate} a ${formattedEndDate}` }
                             </span>
                             <span id='font-part' className='text-zinc-400 text-sm sm:text-base md:text-lg font-semibold'>
                                 Fonte: ANP - Agência Nacional do Petróleo, Gás Natural e Biocombustíveis

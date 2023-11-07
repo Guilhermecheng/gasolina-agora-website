@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function MiniBanner() {
     const [scrollYMoreThanZero, setscrollYMoreThanZero] = useState(false);
-    const [isMobileWidth, setIsMobileWidth] = useState(false);
 
     function listenScrollEvent(event: any) {
         if (window.scrollY < 73 && window.innerWidth > 990) {

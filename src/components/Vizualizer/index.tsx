@@ -2,31 +2,11 @@ import { CaretDown } from "phosphor-react";
 
 import { ConfigMenu } from "./ConfigMenu";
 import { PriceBlock } from "./PriceBlock";
+import { useFuel } from "../../hooks/useFuel";
 
 interface VizualizerProps {
     isconfigPageOpen?: boolean;
     setisConfigPageOpen: (isconfigPageOpen: boolean) => void;
-
-    fuelConfig: {
-        configFuelTypeId: string;
-        setConfigFuelTypeId: (variable: string) => void;
-        configFuelTypeName: string;
-        setConfigFuelTypeName: (variable: string) => void;
-        fuelApiFetch: string;
-        setFuelApiFetch:(variable: string) => void;
-    };
-
-    locationConfig: {
-        configLocationType: string;
-        setconfigLocationType: (variable: string) => void;
-        configLocationId: string;
-        setconfigLocationId: (variable: string) => void;
-        configLocationName: string;
-        setconfigLocationName: (variable: string) => void;
-        locationApiFetch: string | string[];
-        setLocationApiFetch: (variable: string | string[]) => void;
-    };
-
     priceData: {
         data_id: string,
 		deviation: number,
@@ -46,12 +26,10 @@ interface VizualizerProps {
 export function Visualizer({
     isconfigPageOpen = false, // page config to set default state
     setisConfigPageOpen,
-
-    fuelConfig,
-    locationConfig,
-
     priceData = null
 }: VizualizerProps) {
+   const { fuelName, locationName } = useFuel();
+
 
     return (
         <section id='section2' className={`${ isconfigPageOpen ? 'h-[600px] md:h-[300px] lg:h-[300px]' : 'h-[380px] sm:h-[340px] md:h-[300px]' } flex flex-col items-center relative`}>
@@ -65,11 +43,11 @@ export function Visualizer({
                     ) : (
                         <div id="config-block" className=" w-[90%] flex flex-col items-start md:items-center justify-center px-8 md:space-x-4 space-y-2 md:space-y-0 md:flex-row whitespace-nowrap overflow-hidden">
                             <div className='w-full flex items-center text-base sm:text-lg md:text-xl lg:text-2xl font-semibold'>
-                            Combustível: <span className='text-orange-400 ml-2'>{ fuelConfig.configFuelTypeName }</span>
+                            Combustível: <span className='text-orange-400 ml-2'>{ fuelName }</span>
                             </div>
 
                             <div className='w-[50%] flex items-center text-base sm:text-lg md:text-xl lg:text-2xl font-semibold'>
-                            Localidade: <span className='text-orange-400 ml-2 '>{ locationConfig.configLocationName }</span>
+                            Localidade: <span className='text-orange-400 ml-2 '>{ locationName }</span>
                             </div>
                         </div>
                     ) }
@@ -85,7 +63,7 @@ export function Visualizer({
                 </div>
 
                 { isconfigPageOpen ? (
-                    <ConfigMenu configState={{ fuelConfig, locationConfig }} setisConfigPageOpen={setisConfigPageOpen} />
+                    <ConfigMenu setisConfigPageOpen={setisConfigPageOpen} />
                 ) : (
                     <PriceBlock priceData={priceData} />
                 ) }

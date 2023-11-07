@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Skeleton } from "../Skeleton";
-import { GlobalContext } from "../../context/ConfigContext";
 import { fuelDatabase } from "../../utils/FuelLocHandlerDatabase";
+import { useFuel } from "../../hooks/useFuel";
 
 interface PriceBlockProps {
     priceData: {
@@ -21,15 +21,16 @@ interface PriceBlockProps {
 }
 
 export function PriceBlock({ priceData }: PriceBlockProps) {
-    const { configFuelTypeId } = useContext(GlobalContext);
+    const { fuelId } = useFuel();
+
     const [measureUnit, setMeasureUnit] = useState('litro');
 
     useEffect(() => {
-        const fuelUnit = fuelDatabase.find(fuel => fuel.id === configFuelTypeId);
+        const fuelUnit = fuelDatabase.find(fuel => fuel.id === fuelId);
         if(fuelUnit?.measureUnit) {
             setMeasureUnit(fuelUnit.measureUnit);
         }
-    },[configFuelTypeId]);
+    },[fuelId]);
 
     console.log(priceData);
     /* -- data formatting -- */

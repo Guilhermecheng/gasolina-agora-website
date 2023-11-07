@@ -1,43 +1,32 @@
 import * as Accordion from '@radix-ui/react-accordion';
 
 import { capitalsDatabase, fuelDatabase, regionalDatabase, statesDatabase } from '../../utils/FuelLocHandlerDatabase';
+import { useFuel } from '../../hooks/useFuel';
 
 interface ConfigMenuProps {
-    configState: {
-        fuelConfig: {
-            configFuelTypeId: string;
-            setConfigFuelTypeId: (variable: string) => void;
-            configFuelTypeName: string;
-            setConfigFuelTypeName: (variable: string) => void;
-            fuelApiFetch: string;
-            setFuelApiFetch:(variable: string) => void;
-        };
-    
-        locationConfig: {
-            configLocationType: string;
-            setconfigLocationType: (variable: string) => void;
-            configLocationId: string;
-            setconfigLocationId: (variable: string) => void;
-            configLocationName: string;
-            setconfigLocationName: (variable: string) => void;
-            locationApiFetch: string | string[];
-            setLocationApiFetch: (variable: string | string[]) => void;
-        };
-    };
-
     setisConfigPageOpen: (isconfigPageOpen: boolean) => void;
 }
 
-export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps) {
-    const { fuelConfig, locationConfig } = configState;
+export function ConfigMenu({ setisConfigPageOpen }: ConfigMenuProps) {
+    const { 
+        fuelId, 
+        locationId, 
+        setFuelId, 
+        setFuelName, 
+        setFuelApiFetch, 
+        setLocationApiFetch, 
+        setLocationId, 
+        setLocationName, 
+        setLocationType 
+    } = useFuel();
 
     function setNewFuel(fuelId: string) {
         const newFuel = fuelDatabase.find(fuel => fuel.id === fuelId)
         console.log(newFuel);
         if(newFuel) {
-            fuelConfig.setConfigFuelTypeId(newFuel.id);
-            fuelConfig.setConfigFuelTypeName(newFuel.name)
-            fuelConfig.setFuelApiFetch(newFuel.apiFetch);
+            setFuelId(newFuel.id);
+            setFuelName(newFuel.name);
+            setFuelApiFetch(newFuel.apiFetch);
             setisConfigPageOpen(false);
         }
     }
@@ -46,7 +35,7 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
         console.log(locationId, locationName, locationType)
         switch(locationType) {
             case 'general': 
-                locationConfig.setLocationApiFetch("")
+                setLocationApiFetch("")
                 // setTitleLoc('Brasil');
                 // setlocPronoun('no');
                 break;
@@ -56,7 +45,7 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
                 console.log(regionData)
                 if (regionData?.fetchSlug) {
                     let fetchslug = regionData.fetchSlug.toUpperCase();
-                    locationConfig.setLocationApiFetch(fetchslug)
+                    setLocationApiFetch(fetchslug)
                 }
                 // setTitleLoc(regionData?.name);
                 // setlocPronoun('na');
@@ -67,7 +56,7 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
                 console.log(stateData)
                 if (stateData?.fetchSlug) {
                     let fetchslug = stateData.fetchSlug.map(item => item.toUpperCase())
-                    locationConfig.setLocationApiFetch(fetchslug)
+                    setLocationApiFetch(fetchslug)
                 }
                 // setTitleLoc(stateData?.name);
                 // setlocPronoun(stateData?.pronoun);
@@ -78,7 +67,7 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
                 console.log(capitalData)
                 if (capitalData?.fetchSlug) {
                     let fetchslug = capitalData.fetchSlug.map(item => item.toUpperCase())
-                    locationConfig.setLocationApiFetch(fetchslug)
+                    setLocationApiFetch(fetchslug)
                 }
                 // setTitleLoc(capitalData?.name);
                 // setlocPronoun('na cidade de');
@@ -90,13 +79,12 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
                 break;
         }
 
-        locationConfig.setconfigLocationId(locationId);
-        locationConfig.setconfigLocationType(locationType);
-        locationConfig.setconfigLocationName(locationName);
+        setLocationId(locationId);
+        setLocationType(locationType);
+        setLocationName(locationName);
         setisConfigPageOpen(false);
     }
 
-    console.log(locationConfig.configLocationId)
     
     return (
         <div id='config-menu' className={`flex flex-col items-center text-textmaincolor mt-6 `}>
@@ -110,7 +98,7 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
                             return (
                                 <li 
                                     key={fuel.id} 
-                                    className={`w-full flex justify-center text-zinc-100 text-xl font-semibold cursor-pointer rounded my-1 hover:bg-orange-400 ${ fuel.id === fuelConfig.configFuelTypeId ? 'bg-textmaincolor' : 'bg-neutral-400'}`}
+                                    className={`w-full flex justify-center text-zinc-100 text-xl font-semibold cursor-pointer rounded my-1 hover:bg-orange-400 ${ fuel.id === fuelId ? 'bg-textmaincolor' : 'bg-neutral-400'}`}
                                     onClick={() => setNewFuel(fuel.id) }
                                 >
                                     { fuel.name }
@@ -124,7 +112,7 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
 
                     <div className="block w-80 bg-zinc-100 p-6">
                     <h2 
-                        className={`w-full flex justify-center text-zinc-100 text-xl font-semibold cursor-pointer rounded my-1 hover:bg-orange-400 ${ locationConfig.configLocationId === 'brasil' ? 'bg-textmaincolor' : 'bg-neutral-400'}`}
+                        className={`w-full flex justify-center text-zinc-100 text-xl font-semibold cursor-pointer rounded my-1 hover:bg-orange-400 ${ locationId === 'brasil' ? 'bg-textmaincolor' : 'bg-neutral-400'}`}
                         onClick={() => setNewLocation('brasil', 'Brasil', 'general')}
                     >
                         Brasil
@@ -141,7 +129,7 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
                                     return (
                                         <p  
                                             key={region.id} 
-                                            className={`font-semibold cursor-pointer hover:text-orange-400 mt-1 text-zinc-600 px-2 rounded ${ region.id === locationConfig.configLocationId ? 'bg-textmaincolor text-zinc-200 py-1' : 'text-zinc-600'}`}
+                                            className={`font-semibold cursor-pointer hover:text-orange-400 mt-1 text-zinc-600 px-2 rounded ${ region.id === locationId ? 'bg-textmaincolor text-zinc-200 py-1' : 'text-zinc-600'}`}
                                             onClick={() => setNewLocation(region.id, region.name, region.type)}
                                         >
                                             { region.name }
@@ -161,7 +149,7 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
                                         return (
                                             <p  
                                                 key={state.id} 
-                                                className={`font-semibold cursor-pointer hover:text-orange-400 mt-1 text-zinc-600 px-2 rounded ${ state.id === locationConfig.configLocationId ? 'bg-textmaincolor text-zinc-200 py-1' : 'text-zinc-600'}`}
+                                                className={`font-semibold cursor-pointer hover:text-orange-400 mt-1 text-zinc-600 px-2 rounded ${ state.id === locationId ? 'bg-textmaincolor text-zinc-200 py-1' : 'text-zinc-600'}`}
                                                 onClick={() => setNewLocation(state.id, state.name, state.type)}
                                             >
                                                 { state.name }
@@ -181,7 +169,7 @@ export function ConfigMenu({ configState, setisConfigPageOpen }: ConfigMenuProps
                                     return (
                                         <p  
                                             key={capital.id} 
-                                            className={`font-semibold cursor-pointer hover:text-orange-400 mt-1 text-zinc-600 px-2 rounded ${ capital.id === locationConfig.configLocationId ? 'bg-textmaincolor text-zinc-200 py-1' : 'text-zinc-600'}`}
+                                            className={`font-semibold cursor-pointer hover:text-orange-400 mt-1 text-zinc-600 px-2 rounded ${ capital.id === locationId ? 'bg-textmaincolor text-zinc-200 py-1' : 'text-zinc-600'}`}
                                             onClick={() => setNewLocation(capital.id, capital.name, capital.type)}
                                         >
                                             { capital.name }

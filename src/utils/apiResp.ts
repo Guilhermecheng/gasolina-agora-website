@@ -1,4 +1,4 @@
-
+// test purposes
 export const apiRespGasolComum = {
 	"etanol_price": 3.7,
 	"gasoline_price": 4.98,

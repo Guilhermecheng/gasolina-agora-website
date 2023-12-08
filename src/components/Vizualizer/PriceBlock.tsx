@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Skeleton } from "../Skeleton";
-import { fuelDatabase, regionalDatabase, statesDatabase } from "../../utils/FuelLocHandlerDatabase";
+import { fuelDatabase, statesDatabase } from "../../utils/FuelLocHandlerDatabase";
 import { useFuel } from "../../hooks/useFuel";
 
 interface PriceBlockProps {

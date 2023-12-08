@@ -31,25 +31,25 @@ module.exports = {
       },
       keyframes: {
         'open-accordion': {
-          '0%': {
+          from: {
             height: 0,
           },
-          '100%': {
+          to: {
             height: 'var(--radix-accordion-content-height)',
           }
         },
         'close-accordion': {
-          '0%': {
+          from: {
             height: 'var(--radix-accordion-content-height)',
           },
-          '100%': {
+          to: {
             height: 0,
           }
         }
       },
       animation: {
-        'open-accordion': 'open-accordion .3s cubic-bezier(0.87, 0, 0.13, 1) forwards',
-        'close-accordion': 'close-accordion .3s cubic-bezier(0.87, 0, 0.13, 1) forwards',
+        'open-accordion': 'open-accordion  0.15s ease-out',
+        'close-accordion': 'close-accordion  0.15s ease-out',
       }
     },
   },
